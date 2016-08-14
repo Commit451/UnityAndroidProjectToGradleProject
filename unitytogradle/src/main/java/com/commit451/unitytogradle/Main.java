@@ -15,8 +15,6 @@ import java.util.Scanner;
  */
 public class Main {
 
-    static final boolean DEBUG = true;
-
     static Scanner sReader;
 
     public static void main(String[] args) {
@@ -24,8 +22,8 @@ public class Main {
         sReader = new Scanner(System.in);
 
         String projectPath;
-        if (DEBUG) {
-            projectPath = "C:\\Users\\Jawn\\Desktop\\AndroidWearOrientationTest";
+        if (args.length > 0) {
+            projectPath = args[0];
         } else {
             System.out.println("Please drag and drop in the generated project from Unity");
             projectPath = sReader.nextLine().trim();
@@ -38,16 +36,22 @@ public class Main {
             createOutermostFiles(structure);
             moveFiles(structure, unityProject);
             generateBuildGradle(structure, unityProject);
+            System.out.println("Gradle project built successfully and can be found at");
+            System.out.println(structure.project.getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private static void createOutermostFiles(Structure structure) throws IOException, URISyntaxException {
+        //Have to do it like this, since the . hidden files do not get included
+        //in resources
+        String gitIgnoreText = Utils.loadResourceAsString("gitignore.txt");
+        File gitignore = new File(structure.project, ".gitignore");
+        gitignore.createNewFile();
+        FileUtils.writeStringToFile(gitignore, gitIgnoreText, Charsets.UTF_8);
         File wrapperFolder = new File(structure.project, "gradle" + File.separator + "wrapper");
         wrapperFolder.mkdirs();
-
-        Utils.copyFromResourcesToDir(structure.project, ".gitignore");
         Utils.copyFromResourcesToDir(structure.project, "build.gradle");
         Utils.copyFromResourcesToDir(wrapperFolder, "gradle-wrapper.properties");
         Utils.copyFromResourcesToDir(wrapperFolder, "gradle-wrapper.jar");
@@ -78,7 +82,7 @@ public class Main {
     }
 
     private static void generateBuildGradle(Structure structure, UnityProject project) throws IOException {
-        String content = Utils.loadResourceAsString("inner" + File.separator + "build.gradle");
+        String content = Utils.loadResourceAsString("innerbuild.gradle");
         content = content.replace("$compile_sdk_version$", project.targetSdkVersion);
         content = content.replace("$target_sdk_version$", project.targetSdkVersion);
         content = content.replace("$application_id$", project.packageName);

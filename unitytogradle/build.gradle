@@ -1,9 +1,22 @@
 apply plugin: 'java'
 
+version = '1.0'
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Unity to Gradle',
+                'Implementation-Version': version,
+                'Main-Class': 'com.commit451.unitytogradle.Main'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.guava:guava:19.0'
     compile 'commons-io:commons-io:2.5'
-
-
+    compile 'com.squareup.okio:okio:1.9.0'
 }

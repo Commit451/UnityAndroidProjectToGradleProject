@@ -2,10 +2,11 @@ package com.commit451.unitytogradle;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
-import org.apache.commons.io.FileUtils;
+import okio.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -16,9 +17,18 @@ import java.nio.file.Files;
 class Utils {
 
     static void copyFromResourcesToDir(File folder, String resource) throws IOException, URISyntaxException {
-        URL url = Resources.getResource(resource);
-        File file = new File(url.toURI());
-        FileUtils.copyFileToDirectory(file, folder);
+        copyFromResourcesToDirWithAlternateName(folder, resource, resource);
+    }
+
+    static void copyFromResourcesToDirWithAlternateName(File folder, String resource, String newName) throws IOException, URISyntaxException {
+        InputStream inputStream = Utils.class.getClassLoader().getResourceAsStream(resource);
+        BufferedSource source = Okio.buffer(Okio.source(inputStream));
+        File newFile = new File(folder, newName);
+        BufferedSink sink = Okio.buffer(Okio.sink(newFile));
+        sink.writeAll(source);
+        sink.flush();
+        sink.close();
+        source.close();
     }
 
     static String loadResourceAsString(String resourceName) throws IOException {
@@ -29,14 +39,5 @@ class Utils {
     static String loadFileAsString(File file) throws IOException {
         byte[] encoded = Files.readAllBytes(file.toPath());
         return new String(encoded, Charsets.UTF_8);
-    }
-
-    static String replaceInFile(String resourceName, String textToReplace, String text) throws IOException {
-        String content = loadResourceAsString(resourceName);
-        return replaceInLoadedFile(content, textToReplace, text);
-    }
-
-    static String replaceInLoadedFile(String fileContents, String textToReplace, String text) {
-        return  fileContents.replaceAll(textToReplace, text);
     }
 }

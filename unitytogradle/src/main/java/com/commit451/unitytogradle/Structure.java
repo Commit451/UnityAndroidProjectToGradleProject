@@ -17,13 +17,13 @@ public class Structure {
     public File res;
 
     public Structure() {
-        project = new File("project");
+        project = new File("gradle-project");
         project.mkdir();
 
         app = new File(project, "app");
         app.mkdir();
 
-        libs = new File(project, "libs");
+        libs = new File(app, "libs");
         libs.mkdir();
 
         main = new File(app, "src" + File.separator + "main");
