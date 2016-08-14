@@ -3,6 +3,9 @@ Takes the output project from Unity and converts it into a proper Gradle project
 
 [![Build Status](https://travis-ci.org/Commit451/ResourcesPoet.svg?branch=master)](https://travis-ci.org/Commit451/ResourcesPoet)
 
+# Download
+Download the latest jar [here](https://github.com/Commit451/UnityAndroidProjectToGradleProject/releases/latest)
+
 # Basic Usage
 To convert a project interactively:
 ```java
