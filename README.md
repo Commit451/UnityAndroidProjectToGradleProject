@@ -4,11 +4,12 @@ Takes the output project from Unity and converts it into a proper Gradle project
 [![Build Status](https://travis-ci.org/Commit451/ResourcesPoet.svg?branch=master)](https://travis-ci.org/Commit451/ResourcesPoet)
 
 # Basic Usage
-Write variables to the poet like:
 ```java
 //TODO
 ```
 
+# Why Not Just Use Import?
+Android Studio does allow for importing non gradle projects, as highlighted [here](https://docs.unity3d.com/Manual/android-BuildProcess.html) which works really well. The main goal for this script is that it would allow for more of an automated build process.
 License
 --------
 

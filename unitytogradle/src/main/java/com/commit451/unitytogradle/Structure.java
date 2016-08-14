@@ -9,9 +9,11 @@ public class Structure {
 
     public File project;
     public File app;
+    public File libs;
     public File main;
     public File assets;
     public File java;
+    public File jniLibs;
     public File res;
 
     public Structure() {
@@ -21,7 +23,10 @@ public class Structure {
         app = new File(project, "app");
         app.mkdir();
 
-        main = new File(app, "src" + File.pathSeparator + "main");
+        libs = new File(project, "libs");
+        libs.mkdir();
+
+        main = new File(app, "src" + File.separator + "main");
         main.mkdirs();
 
         assets = new File(main, "assets");
@@ -29,6 +34,9 @@ public class Structure {
 
         java = new File(main, "java");
         java.mkdir();
+
+        jniLibs = new File(main, "jniLibs");
+        jniLibs.mkdir();
 
         res = new File(main, "res");
         res.mkdir();
