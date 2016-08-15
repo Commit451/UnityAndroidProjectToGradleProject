@@ -2,13 +2,10 @@ package com.commit451.unitytogradle
 
 import com.google.common.base.Charsets
 import com.google.common.io.Resources
-import okio.*
-
+import okio.Okio
 import java.io.File
 import java.io.IOException
-import java.io.InputStream
 import java.net.URISyntaxException
-import java.net.URL
 import java.nio.file.Files
 
 /**
@@ -23,7 +20,7 @@ internal object Utils {
 
     @Throws(IOException::class, URISyntaxException::class)
     fun copyFromResourcesToDirWithAlternateName(folder: File, resource: String, newName: String) {
-        val inputStream = Utils::class.java!!.getClassLoader().getResourceAsStream(resource)
+        val inputStream = Utils::class.java.getClassLoader().getResourceAsStream(resource)
         val source = Okio.buffer(Okio.source(inputStream))
         val newFile = File(folder, newName)
         val sink = Okio.buffer(Okio.sink(newFile))
