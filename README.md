@@ -1,7 +1,7 @@
 # UnityAndroidProjectToGradleProject
 Takes the output project from Unity and converts it into a proper Gradle project that can be easily opened in Android Studio
 
-[![Build Status](https://travis-ci.org/Commit451/ResourcesPoet.svg?branch=master)](https://travis-ci.org/Commit451/ResourcesPoet)
+[![Build Status](https://travis-ci.org/Commit451/UnityAndroidProjectToGradleProject.svg?branch=master)](https://travis-ci.org/Commit451/UnityAndroidProjectToGradleProject)
 
 # Download
 Download the latest jar [here](https://github.com/Commit451/UnityAndroidProjectToGradleProject/releases/latest)

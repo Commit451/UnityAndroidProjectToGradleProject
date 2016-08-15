@@ -16,14 +16,14 @@ object Main {
 
     @JvmStatic fun main(args: Array<String>) {
 
-        var sReader = Scanner(System.`in`)
+        val reader = Scanner(System.`in`)
 
         val projectPath: String
         if (args.size > 0) {
             projectPath = args[0]
         } else {
             println("Please drag and drop in the generated project from Unity")
-            projectPath = sReader.nextLine().trim { it <= ' ' }
+            projectPath = reader.nextLine().trim { it <= ' ' }
         }
         val projectFolder = File(projectPath)
         if (!projectFolder.exists()) {
