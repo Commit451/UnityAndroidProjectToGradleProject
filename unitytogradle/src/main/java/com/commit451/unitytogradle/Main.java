@@ -28,8 +28,13 @@ public class Main {
             System.out.println("Please drag and drop in the generated project from Unity");
             projectPath = sReader.nextLine().trim();
         }
+        File projectFolder = new File(projectPath);
+        if (!projectFolder.exists()) {
+            System.out.println("Folder does not exist");
+            return;
+        }
 
-        Structure structure = new Structure();
+        Structure structure = Structure.create();
 
         try {
             UnityProject unityProject = UnityProject.from(projectPath);

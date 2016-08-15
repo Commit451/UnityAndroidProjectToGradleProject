@@ -7,6 +7,34 @@ import java.io.File;
  */
 public class Structure {
 
+    public static Structure create() {
+        Structure structure = new Structure();
+        structure.project = new File("gradle-project");
+        structure.project.mkdir();
+
+        structure.app = new File(structure.project, "app");
+        structure.app.mkdir();
+
+        structure.libs = new File(structure.app, "libs");
+        structure.libs.mkdir();
+
+        structure.main = new File(structure.app, "src" + File.separator + "main");
+        structure.main.mkdirs();
+
+        structure.assets = new File(structure.main, "assets");
+        structure.assets.mkdir();
+
+        structure.java = new File(structure.main, "java");
+        structure.java.mkdir();
+
+        structure.jniLibs = new File(structure.main, "jniLibs");
+        structure.jniLibs.mkdir();
+
+        structure.res = new File(structure.main, "res");
+        structure.res.mkdir();
+        return structure;
+    }
+
     public File project;
     public File app;
     public File libs;
@@ -16,29 +44,6 @@ public class Structure {
     public File jniLibs;
     public File res;
 
-    public Structure() {
-        project = new File("gradle-project");
-        project.mkdir();
-
-        app = new File(project, "app");
-        app.mkdir();
-
-        libs = new File(app, "libs");
-        libs.mkdir();
-
-        main = new File(app, "src" + File.separator + "main");
-        main.mkdirs();
-
-        assets = new File(main, "assets");
-        assets.mkdir();
-
-        java = new File(main, "java");
-        java.mkdir();
-
-        jniLibs = new File(main, "jniLibs");
-        jniLibs.mkdir();
-
-        res = new File(main, "res");
-        res.mkdir();
+    private Structure() {
     }
 }
