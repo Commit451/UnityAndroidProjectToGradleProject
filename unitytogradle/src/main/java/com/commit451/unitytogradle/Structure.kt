@@ -7,15 +7,6 @@ import java.io.File
  */
 class Structure private constructor() {
 
-    lateinit var project: File
-    lateinit var app: File
-    lateinit var libs: File
-    lateinit var main: File
-    lateinit var assets: File
-    lateinit var java: File
-    lateinit var jniLibs: File
-    lateinit var res: File
-
     companion object {
 
         fun create(): Structure {
@@ -46,4 +37,13 @@ class Structure private constructor() {
             return structure
         }
     }
+
+    lateinit var project: File
+    lateinit var app: File
+    lateinit var libs: File
+    lateinit var main: File
+    lateinit var assets: File
+    lateinit var java: File
+    lateinit var jniLibs: File
+    lateinit var res: File
 }

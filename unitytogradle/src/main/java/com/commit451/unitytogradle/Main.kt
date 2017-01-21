@@ -19,7 +19,7 @@ object Main {
         val reader = Scanner(System.`in`)
 
         val projectPath: String
-        if (args.size > 0) {
+        if (args.isNotEmpty()) {
             projectPath = args[0]
         } else {
             println("Please drag and drop in the generated project from Unity")
@@ -47,7 +47,7 @@ object Main {
     }
 
     @Throws(IOException::class, URISyntaxException::class)
-    private fun createOutermostFiles(structure: Structure) {
+    fun createOutermostFiles(structure: Structure) {
         //Have to do it like this, since the . hidden files do not get included
         //in resources
         val gitIgnoreText = Utils.loadResourceAsString("gitignore.txt")
@@ -66,7 +66,7 @@ object Main {
     }
 
     @Throws(IOException::class)
-    private fun moveFiles(structure: Structure, project: UnityProject) {
+    fun moveFiles(structure: Structure, project: UnityProject) {
         FileUtils.copyDirectoryToDirectory(project.assets, structure.main)
         for (file in project.src.listFiles()!!) {
             FileUtils.copyDirectoryToDirectory(file, structure.java)
@@ -87,7 +87,7 @@ object Main {
     }
 
     @Throws(IOException::class)
-    private fun generateBuildGradle(structure: Structure, project: UnityProject) {
+    fun generateBuildGradle(structure: Structure, project: UnityProject) {
         var content = Utils.loadResourceAsString("innerbuild.gradle")
         content = content.replace("\$compile_sdk_version$", project.targetSdkVersion)
         content = content.replace("\$target_sdk_version$", project.targetSdkVersion)

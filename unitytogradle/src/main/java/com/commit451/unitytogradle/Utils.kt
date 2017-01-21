@@ -11,7 +11,7 @@ import java.nio.file.Files
 /**
  * Stuff
  */
-internal object Utils {
+object Utils {
 
     @Throws(IOException::class, URISyntaxException::class)
     fun copyFromResourcesToDir(folder: File, resource: String) {
