@@ -1,7 +1,6 @@
 package com.commit451.unitytogradle
 
 import java.io.File
-import java.io.IOException
 
 /**
  * Defines the structure of the current Unity project
@@ -24,7 +23,6 @@ class UnityProject private constructor() {
 
     companion object {
 
-        @Throws(IOException::class)
         fun from(pathToRootOfProject: String): UnityProject {
             val unityProject = UnityProject()
             unityProject.project = File(pathToRootOfProject)
@@ -44,7 +42,6 @@ class UnityProject private constructor() {
             return unityProject
         }
 
-        @Throws(IOException::class)
         private fun parsePackageNameFromManifest(fileContent: String): String {
             val text = "package=\""
             val indexOfStart = fileContent.indexOf(text) + text.length
@@ -52,7 +49,6 @@ class UnityProject private constructor() {
             return fileContent.substring(indexOfStart, inextOfEnd)
         }
 
-        @Throws(IOException::class)
         private fun parseVersionNameFromManifest(fileContent: String): String {
             val text = "versionName=\""
             val indexOfStart = fileContent.indexOf(text) + text.length
@@ -60,7 +56,6 @@ class UnityProject private constructor() {
             return fileContent.substring(indexOfStart, inextOfEnd)
         }
 
-        @Throws(IOException::class)
         private fun parseVersionCodeFromManifest(fileContent: String): String {
             val text = "versionCode=\""
             val indexOfStart = fileContent.indexOf(text) + text.length
@@ -68,7 +63,6 @@ class UnityProject private constructor() {
             return fileContent.substring(indexOfStart, inextOfEnd)
         }
 
-        @Throws(IOException::class)
         private fun parseMinSdkVersion(fileContent: String): String {
             val text = "minSdkVersion=\""
             val indexOfStart = fileContent.indexOf(text) + text.length
@@ -76,7 +70,6 @@ class UnityProject private constructor() {
             return fileContent.substring(indexOfStart, inextOfEnd)
         }
 
-        @Throws(IOException::class)
         private fun parseTargetSdkVersion(fileContent: String): String {
             val text = "targetSdkVersion=\""
             val indexOfStart = fileContent.indexOf(text) + text.length

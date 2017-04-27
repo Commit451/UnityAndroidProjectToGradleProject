@@ -4,7 +4,6 @@ import com.google.common.base.Charsets
 import org.apache.commons.io.FileUtils
 import java.io.File
 import java.io.IOException
-import java.net.URISyntaxException
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 import java.util.*
@@ -19,7 +18,7 @@ object Main {
         val reader = Scanner(System.`in`)
 
         val projectPath: String
-        if (args.size > 0) {
+        if (args.isNotEmpty()) {
             projectPath = args[0]
         } else {
             println("Please drag and drop in the generated project from Unity")
@@ -33,20 +32,14 @@ object Main {
 
         val structure = Structure.create()
 
-        try {
-            val unityProject = UnityProject.from(projectPath)
-            createOutermostFiles(structure)
-            moveFiles(structure, unityProject)
-            generateBuildGradle(structure, unityProject)
-            println("Gradle project built successfully and can be found at")
-            println(structure.project.absolutePath)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
+        val unityProject = UnityProject.from(projectPath)
+        createOutermostFiles(structure)
+        moveFiles(structure, unityProject)
+        generateBuildGradle(structure, unityProject)
+        println("Gradle project built successfully and can be found at")
+        println(structure.project.absolutePath)
     }
 
-    @Throws(IOException::class, URISyntaxException::class)
     private fun createOutermostFiles(structure: Structure) {
         //Have to do it like this, since the . hidden files do not get included
         //in resources
@@ -65,7 +58,6 @@ object Main {
         Utils.copyFromResourcesToDir(structure.project, "gradle.properties")
     }
 
-    @Throws(IOException::class)
     private fun moveFiles(structure: Structure, project: UnityProject) {
         FileUtils.copyDirectoryToDirectory(project.assets, structure.main)
         for (file in project.src.listFiles()!!) {
@@ -86,7 +78,6 @@ object Main {
         Files.move(movedProguard.toPath(), newProguardName.toPath(), StandardCopyOption.REPLACE_EXISTING)
     }
 
-    @Throws(IOException::class)
     private fun generateBuildGradle(structure: Structure, project: UnityProject) {
         var content = Utils.loadResourceAsString("innerbuild.gradle")
         content = content.replace("\$compile_sdk_version$", project.targetSdkVersion)
