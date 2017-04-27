@@ -9,7 +9,7 @@ import java.nio.file.Files
 /**
  * Stuff
  */
-internal object Utils {
+object Utils {
 
     fun copyFromResourcesToDir(folder: File, resource: String) {
         copyFromResourcesToDirWithAlternateName(folder, resource, resource)

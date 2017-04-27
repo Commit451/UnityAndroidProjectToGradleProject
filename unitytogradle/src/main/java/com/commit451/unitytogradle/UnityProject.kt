@@ -7,20 +7,6 @@ import java.io.File
  */
 class UnityProject private constructor() {
 
-    lateinit var project: File
-    lateinit var assets: File
-    lateinit var libs: File
-    lateinit var res: File
-    lateinit var src: File
-    lateinit var manifest: File
-    lateinit var proguard: File
-
-    lateinit var packageName: String
-    lateinit var versionName: String
-    lateinit var versionCode: String
-    lateinit var minSdkVersion: String
-    lateinit var targetSdkVersion: String
-
     companion object {
 
         fun from(pathToRootOfProject: String): UnityProject {
@@ -78,5 +64,17 @@ class UnityProject private constructor() {
         }
     }
 
+    lateinit var project: File
+    lateinit var assets: File
+    lateinit var libs: File
+    lateinit var res: File
+    lateinit var src: File
+    lateinit var manifest: File
+    lateinit var proguard: File
 
+    lateinit var packageName: String
+    lateinit var versionName: String
+    lateinit var versionCode: String
+    lateinit var minSdkVersion: String
+    lateinit var targetSdkVersion: String
 }

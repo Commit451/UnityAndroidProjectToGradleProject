@@ -58,6 +58,8 @@ object Main {
         Utils.copyFromResourcesToDir(structure.project, "gradle.properties")
     }
 
+    @Throws(IOException::class)
+    fun moveFiles(structure: Structure, project: UnityProject) {
     private fun moveFiles(structure: Structure, project: UnityProject) {
         FileUtils.copyDirectoryToDirectory(project.assets, structure.main)
         for (file in project.src.listFiles()!!) {
@@ -78,6 +80,8 @@ object Main {
         Files.move(movedProguard.toPath(), newProguardName.toPath(), StandardCopyOption.REPLACE_EXISTING)
     }
 
+    @Throws(IOException::class)
+    fun generateBuildGradle(structure: Structure, project: UnityProject) {
     private fun generateBuildGradle(structure: Structure, project: UnityProject) {
         var content = Utils.loadResourceAsString("innerbuild.gradle")
         content = content.replace("\$compile_sdk_version$", project.targetSdkVersion)
