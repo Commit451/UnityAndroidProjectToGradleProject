@@ -13,7 +13,8 @@ import java.util.*
  */
 object Main {
 
-    @JvmStatic fun main(args: Array<String>) {
+    @JvmStatic
+    fun main(args: Array<String>) {
 
         val reader = Scanner(System.`in`)
 

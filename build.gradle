@@ -1,13 +1,13 @@
 apply plugin: 'com.github.ben-manes.versions'
 buildscript {
-    ext.kotlinVersion = '1.1.2'
+    ext.kotlinVersion = '1.1.51'
     repositories {
         jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         //check with ./gradlew dependencyUpdates
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.14.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
     }
 }
 
